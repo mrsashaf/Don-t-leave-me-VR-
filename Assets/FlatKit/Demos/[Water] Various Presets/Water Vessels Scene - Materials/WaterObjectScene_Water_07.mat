@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4321619813945176072
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WaterObjectScene_Water_07
+  m_Shader: {fileID: 4800000, guid: efcaf526ceb1f4efd9eb4e4c30c6ade6, type: 3}
+  m_Parent: {fileID: 2100000, guid: 929f0b92dad27420ebe1604300e9bec3, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _COLORMODE_LINEAR
+  - _FOAMMODE_TEXTURE
+  - _WAVEMODE_GRID
+  m_InvalidKeywords:
+  - _OPAQUE_OFF
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _CrestSharpness: 0.1
+    - _FadeDistance: 0.45
+    - _FoamAmount: 0.09
+    - _FoamDepth: 0.26
+    - _FoamMode: 2
+    - _FoamScale: -0.22
+    - _FoamSharpness: 0.73
+    - _FoamSpeed: 3.99
+    - _FoamStretchX: 1
+    - _FoamStretchY: 1
+    - _RefractionAmplitude: 0.01
+    - _RefractionFrequency: 23.1
+    - _RefractionScale: 3
+    - _RefractionSpeed: 0.77
+    - _WaterClearness: 0.29
+    - _WaterDepth: 3.56
+    - _WaveAmplitude: 0.25
+    - _WaveFrequency: 1
+    - _WaveMode: 2
+    m_Colors:
+    - _ColorDeep: {r: 0.99215686, g: 0.7041086, b: 0, a: 1}
+    - _ColorShallow: {r: 1, g: 0.78832114, b: 0, a: 0.8156863}
+    - _FoamColor: {r: 1, g: 0.904488, b: 0.5235849, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
