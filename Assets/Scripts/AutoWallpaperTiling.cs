@@ -2,94 +2,97 @@
 
 [ExecuteAlways]
 [RequireComponent(typeof(Renderer))]
-public class AutoWallpaperTiling : MonoBehaviour
+public class AutoWallpaperTiling_PB_Stable : MonoBehaviour
 {
     public enum MappingPlane { XY, XZ, ZY }
 
-    [Header("Масштаб")]
-    [Tooltip("Сколько тайлов на метр. 1 = один повтор текстуры на 1 м.")]
-    public float tilesPerMeter = 1f;
-
-    [Tooltip("Какая плоскость у стены считается лицевой (ось UxV).")]
+    [Header("Mapping")]
     public MappingPlane plane = MappingPlane.XY;
 
-    [Header("Материал")]
-    [Tooltip("Если у меша несколько материалов, выбери индекс целевого.")]
+    [Tooltip("Сколько повторов на 1 метр (обе оси)")]
+    public float tilesPerMeter = 1f;
+
+    [Header("Material slot")]
     public int materialIndex = 0;
 
-    [Tooltip("Обновлять каждый кадр (удобно в редакторе). На билде можно выключить.")]
-    public bool continuousUpdate = true;
+    [Header("Reapply policy")]
+    [Tooltip("В редакторе (в т.ч. после Bake) переустанавливать каждый кадр")]
+    public bool reapplyEveryFrameInEditor = true;
 
-    Renderer _renderer;
+    [Tooltip("В игре переустанавливать каждый кадр (включай, если что-то сбрасывает ST во время рантайма)")]
+    public bool reapplyEveryFrameInPlaymode = false;
+
+    Renderer _r;
     MaterialPropertyBlock _mpb;
+
+    static readonly int MAIN_TEX_ST = Shader.PropertyToID("_MainTex_ST");  // Built-in/Standard
+    static readonly int BASEMAP_ST = Shader.PropertyToID("_BaseMap_ST");  // URP Lit
 
     void OnEnable()
     {
-        _renderer = GetComponent<Renderer>();
+        _r = GetComponent<Renderer>();
+        if (_mpb == null) _mpb = new MaterialPropertyBlock();
+        Apply();
+    }
+
+    void OnValidate()
+    {
+        if (tilesPerMeter <= 0f) tilesPerMeter = 1f;
+        if (_r == null) _r = GetComponent<Renderer>();
         if (_mpb == null) _mpb = new MaterialPropertyBlock();
         Apply();
     }
 
     void Update()
     {
-        if (continuousUpdate) Apply();
+        // Главное: в редакторе после лайтбейка PropertyBlock часто сбрасывается.
+        // Этот реапплай каждый кадр гарантирует неизменный вид.
+        bool need =
+#if UNITY_EDITOR
+            (!Application.isPlaying && reapplyEveryFrameInEditor) ||
+#endif
+            (Application.isPlaying && reapplyEveryFrameInPlaymode);
+
+        if (need) Apply();
     }
 
-    void OnValidate()
-    {
-        if (tilesPerMeter <= 0f) tilesPerMeter = 1f;
-        if (_renderer == null) _renderer = GetComponent<Renderer>();
-        if (_mpb == null) _mpb = new MaterialPropertyBlock();
-        Apply();
-    }
+    void OnTransformParentChanged() => Apply(); // на всякий случай при перестановках
 
     void Apply()
     {
-        if (_renderer == null) return;
+        if (_r == null) return;
+        if (materialIndex < 0 || materialIndex >= _r.sharedMaterials.Length) return;
 
-        // вычисляем физический размер объекта по двум осям выбранной плоскости
-        Vector2 worldSize = GetWorldSizeOnPlane();
+        // Размер по локальному мешу * lossyScale (корректно при любых поворотах)
+        Vector3 size = GetWorldSizeFromMesh();
+        Vector2 axis = plane switch
+        {
+            MappingPlane.XY => new Vector2(size.x, size.y),
+            MappingPlane.XZ => new Vector2(size.x, size.z),
+            MappingPlane.ZY => new Vector2(size.z, size.y),
+            _ => new Vector2(size.x, size.y)
+        };
 
-        // сколько раз должна повториться текстура по осям
-        Vector2 tiling = worldSize * tilesPerMeter;
+        Vector2 tiling = axis * tilesPerMeter;
 
-        // подаём в материал через PropertyBlock (не клонируем материал)
-        _renderer.GetPropertyBlock(_mpb, materialIndex);
-
-        // Для Standard/Built-in:
-        _mpb.SetVector("_MainTex_ST", new Vector4(tiling.x, tiling.y, 0f, 0f));
-        // Для URP (Base Map):
-        _mpb.SetVector("_BaseMap_ST", new Vector4(tiling.x, tiling.y, 0f, 0f));
-
-        _renderer.SetPropertyBlock(_mpb, materialIndex);
+        _r.GetPropertyBlock(_mpb, materialIndex);
+        _mpb.SetVector(MAIN_TEX_ST, new Vector4(tiling.x, tiling.y, 0f, 0f));
+        _mpb.SetVector(BASEMAP_ST, new Vector4(tiling.x, tiling.y, 0f, 0f));
+        _r.SetPropertyBlock(_mpb, materialIndex);
     }
 
-    Vector2 GetWorldSizeOnPlane()
+    Vector3 GetWorldSizeFromMesh()
     {
-        // Пытаемся взять размер из меша (точнее, чем просто lossyScale)
-        Vector3 size = Vector3.one;
         var mf = GetComponent<MeshFilter>();
-        if (mf != null && mf.sharedMesh != null)
+        if (mf && mf.sharedMesh)
         {
-            // bounds в локале → переводим в мир
-            Vector3 localSize = mf.sharedMesh.bounds.size;
+            Vector3 local = mf.sharedMesh.bounds.size;
             Vector3 s = transform.lossyScale;
-            size = new Vector3(Mathf.Abs(localSize.x * s.x),
-                               Mathf.Abs(localSize.y * s.y),
-                               Mathf.Abs(localSize.z * s.z));
+            return new Vector3(Mathf.Abs(local.x * s.x),
+                               Mathf.Abs(local.y * s.y),
+                               Mathf.Abs(local.z * s.z));
         }
-        else
-        {
-            // запасной вариант
-            size = transform.lossyScale;
-        }
-
-        switch (plane)
-        {
-            case MappingPlane.XY: return new Vector2(size.x, size.y);
-            case MappingPlane.XZ: return new Vector2(size.x, size.z);
-            case MappingPlane.ZY: return new Vector2(size.z, size.y);
-            default: return new Vector2(size.x, size.y);
-        }
+        // фолбек
+        return transform.lossyScale;
     }
 }
