@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b6-4f25-7449-8fb9-302232e511d5.pose.json",
+    "prompt": "quick nervous peek from behind door",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 264034671,
+    "w3CTraceId": "ae9dd9e85e246a5e9c1181a77d3148ca",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e298-116d-79e9-91ee-98ba35f8987a.pose.json",
+    "prompt": "Person at wall; head hits, recoil, two breaths, repeat.",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1708021061,
+    "w3CTraceId": "248ac94ec57ee71e04b091c79031474e",
+    "isTrimmed": false
+}

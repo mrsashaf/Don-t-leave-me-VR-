@@ -1,0 +1,11 @@
+{
+    "asset": "b208f091a45a62547838df3237b0932d",
+    "fileName": "0198e285-6705-7fa5-95a9-64ab6ed7a14d.pose.json",
+    "prompt": "Inverted-bridge human sprints on all fours, belly up, spine arched\n",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 47402343,
+    "w3CTraceId": "40aa1cee6d0753aab28f3b5a5f9a900d",
+    "isTrimmed": false
+}

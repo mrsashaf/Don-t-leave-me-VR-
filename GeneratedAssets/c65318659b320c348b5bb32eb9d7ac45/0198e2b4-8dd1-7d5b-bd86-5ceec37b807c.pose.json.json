@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b4-8dd1-7d5b-bd86-5ceec37b807c.pose.json",
+    "prompt": "peek around right door edge",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1073013862,
+    "w3CTraceId": "e6f26569f9ecb1f6343c4a634ac41ecb",
+    "isTrimmed": false
+}

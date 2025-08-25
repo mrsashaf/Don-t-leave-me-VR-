@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e29b-415e-740e-996b-c77cd29c7020.pose.json",
+    "prompt": "small lean in door",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 2484334,
+    "w3CTraceId": "bf3e7dd3a4bf17e087d8b7c3430c416e",
+    "isTrimmed": false
+}

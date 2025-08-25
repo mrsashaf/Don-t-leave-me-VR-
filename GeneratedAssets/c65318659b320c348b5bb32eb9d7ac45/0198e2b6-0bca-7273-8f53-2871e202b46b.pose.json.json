@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b6-0bca-7273-8f53-2871e202b46b.pose.json",
+    "prompt": "quick nervous peek from behind door, head first, one eye visible, micro recoil",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 145139416,
+    "w3CTraceId": "bf358ff03868f0757509a3226bf96d1e",
+    "isTrimmed": false
+}

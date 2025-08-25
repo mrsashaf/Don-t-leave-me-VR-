@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b2-d406-7127-86fa-b8acd92b69cf.pose.json",
+    "prompt": "character peeks from behind a door, slow lean in, short hold, retreat",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 737801475,
+    "w3CTraceId": "2ad5ba7bf2855f4740ea6fbd46241b3f",
+    "isTrimmed": false
+}

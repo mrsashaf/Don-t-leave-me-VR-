@@ -1,0 +1,11 @@
+{
+    "asset": "b208f091a45a62547838df3237b0932d",
+    "fileName": "0198e282-42f6-7b84-9cf8-7945643b9366.pose.json",
+    "prompt": " crouch walk\n\n ",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 2223261,
+    "w3CTraceId": "f0beea9b38067bf1a8a9daac9221513f",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "b208f091a45a62547838df3237b0932d",
+    "fileName": "0198e285-a44b-7e27-a5da-aac39dccdab0.pose.json",
+    "prompt": "Inverted-bridge human sprints on all fours\n",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 228138152,
+    "w3CTraceId": "4a8018463823e485e6bcb937aa477e78",
+    "isTrimmed": false
+}

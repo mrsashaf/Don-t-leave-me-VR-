@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e29a-b76e-73f1-996a-1b6d4cf14798.pose.json",
+    "prompt": "Person peeks slightly from behind the door; small lean in, brief hold, slips back, repeat",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 345721882,
+    "w3CTraceId": "4febc1d18edbeb5e82848855bded86b5",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e299-fafd-7c4a-9e60-343b9dcb40d6.pose.json",
+    "prompt": "человек бъетя головой о стену",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1104541660,
+    "w3CTraceId": "5ab33c16332e320152dfd03526cf20b8",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b8-9d04-737c-97cd-ccd7dbf4af6a.pose.json",
+    "prompt": "peek out of window, stand, hands on sill, slow lean forward, 0.5s look, retract, loop, root stationary",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 677389220,
+    "w3CTraceId": "e5b3138115e2f98f8a45baa409c5fb24",
+    "isTrimmed": false
+}

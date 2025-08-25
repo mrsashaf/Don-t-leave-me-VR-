@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e298-4cb2-7612-baa8-75b2079ede21.pose.json",
+    "prompt": "Person at wall; head hits",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 781875100,
+    "w3CTraceId": "abbb7b2ed84bcbf5c683c9ec487acb77",
+    "isTrimmed": false
+}

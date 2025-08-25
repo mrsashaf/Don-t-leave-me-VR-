@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e298-91de-7fed-9831-f8a9e5dd7528.pose.json",
+    "prompt": "Person head hits",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1833264253,
+    "w3CTraceId": "21aa0a531a8a6920429f689a23a466cf",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "5ff0a094764440544ace5a267049de37",
+    "fileName": "0198e290-d66d-7234-a06f-8660686baafa.pose.json",
+    "prompt": "All-fours run, stiff limbs, head twitching, stop-start bursts, unnatural",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1805378866,
+    "w3CTraceId": "db7e50c4f3929971e248ea082ae7afe0",
+    "isTrimmed": false
+}

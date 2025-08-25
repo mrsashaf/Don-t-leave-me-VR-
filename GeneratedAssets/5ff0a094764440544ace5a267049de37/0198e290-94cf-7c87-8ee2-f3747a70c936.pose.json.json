@@ -1,0 +1,11 @@
+{
+    "asset": "5ff0a094764440544ace5a267049de37",
+    "fileName": "0198e290-94cf-7c87-8ee2-f3747a70c936.pose.json",
+    "prompt": "Human on all fours, twitchy, broken rhythm, sudden bursts of speed",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 2029253165,
+    "w3CTraceId": "acafd8190aa1114c58b18f6bd36d1b31",
+    "isTrimmed": false
+}

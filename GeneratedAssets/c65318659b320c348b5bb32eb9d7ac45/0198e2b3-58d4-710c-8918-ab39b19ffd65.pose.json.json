@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b3-58d4-710c-8918-ab39b19ffd65.pose.json",
+    "prompt": "head banging against wall, rhythmic, unsettling",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 92610124,
+    "w3CTraceId": "c79b1b9f902395c1da526e7cadf57f29",
+    "isTrimmed": false
+}

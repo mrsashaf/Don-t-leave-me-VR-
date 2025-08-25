@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e299-cc8f-72b3-8b62-628d3b6e6203.pose.json",
+    "prompt": "человек юбетя головой о стену",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1329067626,
+    "w3CTraceId": "d26b952d30ef8fa589e8efba27147b43",
+    "isTrimmed": false
+}

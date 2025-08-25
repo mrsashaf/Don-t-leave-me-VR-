@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b5-4893-7c1e-882e-78b518dcdf70.pose.json",
+    "prompt": "peek from behind door, slow lean in, 0.5s hold, retreat, loop, root stationary",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 940045124,
+    "w3CTraceId": "df8cdfa62f4405ffc20c93d72ca49f76",
+    "isTrimmed": false
+}
