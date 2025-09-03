@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e299-5b98-7e6f-be16-76106ca9640b.pose.json",
+    "prompt": " head bangs on wall",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 799328506,
+    "w3CTraceId": "e59ac5debef43a5d97b9f5439747f43a",
+    "isTrimmed": false
+}

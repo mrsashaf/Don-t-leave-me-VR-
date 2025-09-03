@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b7-0e88-7fc6-a155-b08486db06b7.pose.json",
+    "prompt": "door ajar, hand first then half face, brief glance, pull back, one-shot, root stationary",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 578973643,
+    "w3CTraceId": "9dd73b24c983e0ae427130598e78c8a2",
+    "isTrimmed": false
+}

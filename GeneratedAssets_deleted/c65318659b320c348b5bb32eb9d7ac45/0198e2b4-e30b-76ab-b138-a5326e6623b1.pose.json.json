@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b4-e30b-76ab-b138-a5326e6623b1.pose.json",
+    "prompt": "eek from behind door, slow lean in, 0.5s hold, retreat, loop, root stationary",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 397900127,
+    "w3CTraceId": "c43949a9325a704ca5b1a310aeda81d3",
+    "isTrimmed": false
+}

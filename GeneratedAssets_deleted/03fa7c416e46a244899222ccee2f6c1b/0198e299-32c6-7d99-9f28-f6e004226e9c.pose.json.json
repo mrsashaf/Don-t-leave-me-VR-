@@ -1,0 +1,11 @@
+{
+    "asset": "03fa7c416e46a244899222ccee2f6c1b",
+    "fileName": "0198e299-32c6-7d99-9f28-f6e004226e9c.pose.json",
+    "prompt": "Slow head bangs on wall",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1770270523,
+    "w3CTraceId": "ac4630c301be544bccf970ad7ad25f52",
+    "isTrimmed": false
+}

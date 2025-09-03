@@ -1,0 +1,11 @@
+{
+    "asset": "c65318659b320c348b5bb32eb9d7ac45",
+    "fileName": "0198e2b6-d02e-713c-be53-b7ba156e683d.pose.json",
+    "prompt": "open door ",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1268555876,
+    "w3CTraceId": "d5a0e5ff3710fe29a5997e4a595a439e",
+    "isTrimmed": false
+}

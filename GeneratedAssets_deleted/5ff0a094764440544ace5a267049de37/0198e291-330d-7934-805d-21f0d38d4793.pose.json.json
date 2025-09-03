@@ -1,0 +1,11 @@
+{
+    "asset": "5ff0a094764440544ace5a267049de37",
+    "fileName": "0198e291-330d-7934-805d-21f0d38d4793.pose.json",
+    "prompt": "Bridge-like posture, belly up, jerky all-fours sprint, wrong and frantic",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 634949988,
+    "w3CTraceId": "fe5f9d4c6bee44dca00049f430e2f1c3",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "b208f091a45a62547838df3237b0932d",
+    "fileName": "0198e284-c647-7f6d-b4d6-cd2e6ccfd411.pose.json",
+    "prompt": "Backbent “crab-walk” runner: pelvis high, chest up; hands/feet slap floor in frantic bursts; hyperextended joints",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 879097366,
+    "w3CTraceId": "c9e16c860a03a3b9b12940fe0fcbd820",
+    "isTrimmed": false
+}

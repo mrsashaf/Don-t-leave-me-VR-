@@ -1,0 +1,11 @@
+{
+    "asset": "5ff0a094764440544ace5a267049de37",
+    "fileName": "0198e290-371d-796b-95fb-5d634b01cb16.pose.json",
+    "prompt": "Person runs on all fours, jerky and unnatural, too fast",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 440221478,
+    "w3CTraceId": "f9807b4c42083a55397ec18327a95cb3",
+    "isTrimmed": false
+}

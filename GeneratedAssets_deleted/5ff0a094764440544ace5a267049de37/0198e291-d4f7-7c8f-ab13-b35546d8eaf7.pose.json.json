@@ -1,0 +1,11 @@
+{
+    "asset": "5ff0a094764440544ace5a267049de37",
+    "fileName": "0198e291-d4f7-7c8f-ab13-b35546d8eaf7.pose.json",
+    "prompt": "Person crawls like a crab",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 837467288,
+    "w3CTraceId": "fbd82390be0d50f40a2652f4390b764a",
+    "isTrimmed": false
+}

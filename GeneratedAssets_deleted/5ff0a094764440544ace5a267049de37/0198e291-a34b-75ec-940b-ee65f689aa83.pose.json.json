@@ -1,0 +1,11 @@
+{
+    "asset": "5ff0a094764440544ace5a267049de37",
+    "fileName": "0198e291-a34b-75ec-940b-ee65f689aa83.pose.json",
+    "prompt": "Person crawls like a crab, chest up, crazy speed, uneven steps",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1450139364,
+    "w3CTraceId": "10173220bb897570462f49ed169b6e4c",
+    "isTrimmed": false
+}

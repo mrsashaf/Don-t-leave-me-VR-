@@ -6,13 +6,35 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 55daccc09a3b69647bbab145b54a3ab3
+    path: Assets/Scenes/P.T. Trial 02/P.T  Test SceneV2.unity
+    guid: 16fc3f1dac0a4f342968f35959395a41
+  - enabled: 1
+    path: Assets/Scenes/P.T. Trial 02/P.T  Test SceneV2 1.unity
+    guid: c221210180a51ba4fb5ad8ccceb159b0
+  - enabled: 1
+    path: Assets/Scenes/P.T. Trial 02/P.T  Test SceneV2 2.unity
+    guid: b3b1e485e472da74e8b4f510175379b6
+  - enabled: 1
+    path: Assets/Scenes/P.T. Trial 02/P.T  Test SceneV2 3.unity
+    guid: 69488b984f904eb49bd7c42edd87aac4
+  - enabled: 1
+    path: Assets/Scenes/P.T. Trial 02/P.T  Test SceneV2 4 (Woman).unity
+    guid: ecb6925326818af489846fbf5b1440db
+  - enabled: 1
+    path: Assets/Scenes/P.T. Trial 02/P.T  Test SceneV2 5.unity
+    guid: 9c70db390b460ae41bd2dae6403e3ecb
+  - enabled: 1
+    path: Assets/Scenes/P.T. Trial 02/P.T  Test SceneV2 6.unity
+    guid: 344d6c2fed30d6c4f8f2cca7b8753acd
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 9bec1ce6a03ccba4b9a8215241b32e63, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: a49cadc1a815591479693b955ccf08c1, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0ef884ce703eec04da79fdb41693a82d, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: b4cb41368de30394f9bcf75403346080, type: 2}
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 985fdffee33a5944396199c6b7145dd4, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1a4c68ca72a83449f938d669337cb305, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a9a6963505ddf7f4d886008c6dc86122, type: 2}
+  m_UseUCBPForAssetBundles: 0
