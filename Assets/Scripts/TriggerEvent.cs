@@ -1,71 +1,109 @@
 using UnityEngine;
-using UnityEngine.Events; // ОБЯЗАТЕЛЬНО: для работы с UnityEvent
+using UnityEngine.Events;
 
-// [RequireComponent] гарантирует, что на объекте всегда будет коллайдер.
-// Это защищает от случайного удаления коллайдера, без которого скрипт бесполезен.
 [RequireComponent(typeof(Collider))]
 public class TriggerEvent : MonoBehaviour
 {
     [Header("Настройки триггера")]
-    [Tooltip("Тег объекта, который должен вызывать событие. Чаще всего это 'Player'. Оставьте пустым, чтобы реагировать на любой объект.")]
+    [Tooltip("Тег объекта, который должен вызывать событие. Оставьте пустым, чтобы реагировать на любой объект.")]
     public string triggerTag = "Player";
 
-    [Tooltip("Если эта галочка стоит, триггер сработает только один раз и больше не будет активен.")]
+    [Tooltip("Если включено, событие сработает один раз.")]
     public bool fireOnce = true;
 
     [Header("Событие")]
-    [Tooltip("Это событие будет вызвано, когда объект с нужным тегом войдет в триггер.")]
+    [Tooltip("Вызовется при входе нужного объекта в триггер.")]
     public UnityEvent OnTriggered;
 
-    // Приватная переменная, чтобы отслеживать, сработал ли уже триггер
     private bool hasFired = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        // --- ПРОВЕРКИ ---
+        if (fireOnce && hasFired) return;
 
-        // 1. Если триггер одноразовый и он уже сработал, ничего не делаем.
-        if (fireOnce && hasFired)
-        {
-            return;
-        }
-
-        // 2. Проверяем, совпадает ли тег вошедшего объекта с тем, что нам нужен.
-        // Если поле triggerTag пустое, мы пропускаем эту проверку и реагируем на всё.
         bool isTagValid = string.IsNullOrEmpty(triggerTag) || other.CompareTag(triggerTag);
+        if (!isTagValid) return;
 
-        // Если тег не совпадает, ничего не делаем.
-        if (!isTagValid)
-        {
-            return;
-        }
-
-        // --- ВЫПОЛНЕНИЕ ---
-
-        // Если все проверки пройдены, выводим сообщение в консоль для отладки
         Debug.Log($"Триггер '{gameObject.name}' активирован объектом '{other.name}'.");
 
-        // Вызываем все функции, которые вы настроили в инспекторе
-        OnTriggered.Invoke();
+        OnTriggered?.Invoke();
 
-        // Если триггер одноразовый, помечаем, что он сработал
-        if (fireOnce)
-        {
-            hasFired = true;
-        }
+        if (fireOnce) hasFired = true;
     }
 
-    // Этот метод вызывается в редакторе, чтобы показать зону триггера для удобства
+    // ---------------- GIZMOS ----------------
+
+    [Header("Gizmos (визуализация триггера)")]
+    [Tooltip("Показывать гизмо зоны триггера в сцене.")]
+    public bool showGizmos = true;
+
+    [Tooltip("Цвет гизмо (учитывается альфа).")]
+    public Color gizmoColor = new Color(0f, 1f, 0f, 0.3f);
+
+    [Tooltip("Цвет при выделении объекта в иерархии.")]
+    public Color gizmoColorSelected = new Color(0f, 1f, 0f, 0.5f);
+
+    [Tooltip("Рисовать каркас вместо заполненной формы.")]
+    public bool wireframe = false;
+
     private void OnDrawGizmos()
     {
-        // Рисуем полупрозрачный зеленый куб, который показывает границы триггера
-        Gizmos.color = new Color(0, 1, 0, 0.3f);
+        if (!showGizmos) return;
+        DrawColliderGizmo(gizmoColor);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!showGizmos) return;
+        DrawColliderGizmo(gizmoColorSelected);
+    }
+
+    private void DrawColliderGizmo(Color color)
+    {
+        var col = GetComponent<Collider>();
+        if (col == null) return;
+
+        Gizmos.color = color;
         Gizmos.matrix = transform.localToWorldMatrix;
-        // Пытаемся взять размер из BoxCollider, если он есть
-        var boxCollider = GetComponent<BoxCollider>();
-        if (boxCollider != null)
+
+        if (col is BoxCollider box)
         {
-            Gizmos.DrawCube(boxCollider.center, boxCollider.size);
+            if (wireframe) Gizmos.DrawWireCube(box.center, box.size);
+            else Gizmos.DrawCube(box.center, box.size);
+        }
+        else if (col is SphereCollider sphere)
+        {
+            // Для сферы учитываем localScale по максимальной оси (как делает Unity)
+            var maxScale = Mathf.Max(
+                Mathf.Abs(transform.lossyScale.x),
+                Mathf.Abs(transform.lossyScale.y),
+                Mathf.Abs(transform.lossyScale.z)
+            );
+
+            // Так как уже выставили matrix = localToWorld, рисуем в локальных координатах
+            var center = sphere.center;
+            var radius = sphere.radius;
+
+            // У Gizmos нет DrawSphere c матрицей радиуса, поэтому "масштабируем" через матрицу вручную:
+            // Временная матрица: перенос в центр и масштаб по радиусу и maxScale.
+            var prev = Gizmos.matrix;
+            Gizmos.matrix = transform.localToWorldMatrix * Matrix4x4.TRS(center, Quaternion.identity, Vector3.one * (radius * 2f));
+            if (wireframe) Gizmos.DrawWireSphere(Vector3.zero, 0.5f); // сфера единичного диаметра
+            else Gizmos.DrawSphere(Vector3.zero, 0.5f);
+            Gizmos.matrix = prev;
+        }
+        else
+        {
+            // Фолбэк: рисуем bounds как коробку в мировых координатах
+            // Для этого временно сбросим матрицу, т.к. bounds уже в world space.
+            var prev = Gizmos.matrix;
+            Gizmos.matrix = Matrix4x4.identity;
+
+            var b = col.bounds;
+            if (wireframe) Gizmos.DrawWireCube(b.center, b.size);
+            else Gizmos.DrawCube(b.center, b.size);
+
+            Gizmos.matrix = prev;
         }
     }
 }

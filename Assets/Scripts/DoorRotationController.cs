@@ -5,14 +5,11 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 public class DoorRotationController : MonoBehaviour
 {
-    // --- ИСПРАВЛЕНИЕ: Добавлено слово "public" ---
     public enum DoorState { Closed, Creaked, FullyOpen }
 
     [Header("Начальное состояние")]
-    [Tooltip("Укажите здесь, в каком состоянии дверь находится в НАЧАЛЕ сцены. Это должно соответствовать ее положению в редакторе.")]
+    [Tooltip("Укажите здесь, в каком состоянии дверь находится в НАЧАЛЕ сцены.")]
     public DoorState initialState = DoorState.Closed;
-
-    // ... остальной код остается без изменений ...
 
     private DoorState currentState;
 
@@ -48,7 +45,10 @@ public class DoorRotationController : MonoBehaviour
     private AudioSource audioSource;
     private Quaternion openRotation, creakRotation;
     private int lastOpenSoundIndex = -1, lastCloseSoundIndex = -1, lastLockedSoundIndex = -1;
+
+    // --- ИСПРАВЛЕНИЕ 1: Добавляем флаги состояния ---
     private bool _isJiggling = false;
+    private bool _isMoving = false; // Главный флаг, который решает проблему
 
     [ContextMenu("Set Current Rotation as CLOSED")]
     private void SetClosedRotation()
@@ -75,7 +75,7 @@ public class DoorRotationController : MonoBehaviour
         else
         {
             closedRotation = transform.rotation;
-            Debug.LogWarning($"'savedClosedRotation' не было установлено для двери '{gameObject.name}'. Используется текущее положение как закрытое. Для точной работы используйте 'Set Current Rotation as CLOSED' в меню компонента.", this);
+            Debug.LogWarning($"'savedClosedRotation' не было установлено для двери '{gameObject.name}'. Используйте 'Set Current Rotation as CLOSED' в меню компонента.", this);
         }
 
         currentState = initialState;
@@ -90,6 +90,7 @@ public class DoorRotationController : MonoBehaviour
     void Update()
     {
         if (_isJiggling) return;
+
         Quaternion targetRotation;
         switch (currentState)
         {
@@ -104,11 +105,61 @@ public class DoorRotationController : MonoBehaviour
                 targetRotation = closedRotation;
                 break;
         }
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+        // --- ИСПРАВЛЕНИЕ 2: Изменяем логику вращения ---
+        // Если разница между текущим и целевым поворотом достаточно велика, то движемся
+        if (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
+        {
+            _isMoving = true; // Сообщаем, что дверь в движении
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+        else
+        {
+            // Если мы достигли цели, выравниваем поворот и сбрасываем флаг
+            if (_isMoving)
+            {
+                transform.rotation = targetRotation;
+                _isMoving = false; // Сообщаем, что дверь остановилась
+            }
+        }
     }
 
-    private void OnTriggerEnter(Collider other) { if (other.CompareTag("Player")) { if (isLocked) { if (_isJiggling) return; StartCoroutine(JiggleDoorRoutine()); return; } if (currentState == DoorState.FullyOpen) return; currentState = DoorState.FullyOpen; PlayRandomSound(openSounds, ref lastOpenSoundIndex); OnDoorOpened.Invoke(); } }
-    private void OnTriggerExit(Collider other) { if (other.CompareTag("Player")) { if (currentState == DoorState.Closed) return; currentState = DoorState.Closed; PlayRandomSound(closeSounds, ref lastCloseSoundIndex); OnDoorClosed.Invoke(); } }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // --- ИСПРАВЛЕНИЕ 3: Добавляем проверки ---
+            // Не открывать, если дверь уже движется или уже открыта
+            if (_isMoving || currentState == DoorState.FullyOpen) return;
+
+            if (isLocked)
+            {
+                if (_isJiggling) return;
+                StartCoroutine(JiggleDoorRoutine());
+                return;
+            }
+
+            currentState = DoorState.FullyOpen;
+            PlayRandomSound(openSounds, ref lastOpenSoundIndex);
+            OnDoorOpened.Invoke();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // --- ИСПРАВЛЕНИЕ 4: Добавляем проверки ---
+            // Не закрывать, если дверь уже движется или уже закрыта
+            if (_isMoving || currentState == DoorState.Closed) return;
+
+            currentState = DoorState.Closed;
+            PlayRandomSound(closeSounds, ref lastCloseSoundIndex);
+            OnDoorClosed.Invoke();
+        }
+    }
+
+    // Остальные функции без изменений...
     public void CloseAndLock() { if (currentState == DoorState.Closed) { isLocked = true; return; } currentState = DoorState.Closed; isLocked = true; PlayRandomSound(closeSounds, ref lastCloseSoundIndex); OnDoorClosed.Invoke(); }
     public void UnlockAndCreakOpen() { isLocked = false; if (currentState == DoorState.Closed) { currentState = DoorState.Creaked; PlayRandomSound(openSounds, ref lastOpenSoundIndex); } }
     public void LockDoor() { isLocked = true; }

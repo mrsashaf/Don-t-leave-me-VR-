@@ -1,65 +1,71 @@
 using UnityEngine;
 
+/// <summary>
+/// Заставляет объект качаться, изменяя его локальные углы Эйлера.
+/// Этот метод более прямолинеен и может избежать проблем с вращением родительских объектов.
+/// Поместите этот скрипт на родительский объект-крепление.
+/// Все дочерние объекты (лампа, свет) будут качаться вместе с ним.
+/// </summary>
 public class SwingingLight : MonoBehaviour
 {
-    public enum SwingAxis { X, Z } // Оси, по которым может происходить качание
+    public enum SwingAxis { X, Z }
 
     [Header("Настройки качания")]
-    [Tooltip("Максимальный угол качания в градусах в каждую сторону.")]
+    [Tooltip("Максимальный угол отклонения от центра в градусах.")]
     [Range(0f, 90f)]
     public float maxSwingAngle = 15f;
 
-    [Tooltip("Скорость качания. Чем выше значение, тем быстрее.")]
+    [Tooltip("Скорость качания.")]
     public float swingSpeed = 1f;
 
-    [Tooltip("Ось, по которой будет качаться лампа (X = вперед-назад, Z = вправо-влево).")]
+    [Tooltip("Ось, по которой будет происходить качание.")]
     public SwingAxis swingAxis = SwingAxis.Z;
 
     [Header("Случайность")]
-    [Tooltip("Добавляет небольшую случайность в скорость и угол, чтобы лампы не качались синхронно.")]
+    [Tooltip("Добавляет случайное смещение, чтобы лампы не качались синхронно.")]
     public bool addRandomness = true;
 
-    // Приватные переменные для хранения начальных значений
-    private Quaternion initialRotation;
-    private float randomOffset;
+    // Приватные переменные
+    private Vector3 initialLocalAngles;
+    private float randomOffset = 0f;
 
     void Start()
     {
-        // Запоминаем изначальный поворот объекта
-        initialRotation = transform.rotation;
+        // 1. Запоминаем изначальные ЛОКАЛЬНЫЕ углы объекта.
+        initialLocalAngles = transform.localEulerAngles;
 
-        // Если включена случайность, добавляем уникальное смещение для этой лампы
+        // 2. Генерируем смещение для асинхронности
         if (addRandomness)
         {
-            // Случайное число, которое сделает движение уникальным
             randomOffset = Random.Range(0f, 100f);
         }
     }
 
     void Update()
     {
-        // 1. Вычисляем базовый угол с помощью синусоиды
-        // Mathf.Sin(time) создает плавное колебание между -1 и 1
-        float time = Time.time * swingSpeed + randomOffset;
-        float currentAngle = maxSwingAngle * Mathf.Sin(time);
+        // 1. Вычисляем текущее смещение угла с помощью синусоиды.
+        // Это создает плавное колебание от -maxSwingAngle до +maxSwingAngle.
+        float swingOffset = maxSwingAngle * Mathf.Sin(Time.time * swingSpeed + randomOffset);
 
-        // 2. Создаем вращение на основе вычисленного угла
-        Quaternion swingRotation;
+        // ВАЖНО: Для диагностики. Проверьте консоль (Window -> General -> Console).
+        // Если вы видите эти сообщения, значит Update() работает.
+        // Debug.Log("Качание. Смещение угла: " + swingOffset);
 
-        // Выбираем ось вращения в зависимости от настройки в инспекторе
+        // 2. Создаем новый вектор для целевых углов, начиная с исходных.
+        Vector3 targetLocalAngles = initialLocalAngles;
+
+        // 3. Применяем смещение к нужной оси.
         if (swingAxis == SwingAxis.X)
         {
-            // Вращение вперед-назад
-            swingRotation = Quaternion.Euler(currentAngle, 0f, 0f);
+            targetLocalAngles.x += swingOffset;
         }
         else // swingAxis == SwingAxis.Z
         {
-            // Вращение вправо-влево
-            swingRotation = Quaternion.Euler(0f, 0f, currentAngle);
+            targetLocalAngles.z += swingOffset;
         }
 
-        // 3. Применяем новое вращение к изначальному
-        // Мы умножаем, чтобы применить локальное качание к исходному мировому повороту
-        transform.rotation = initialRotation * swingRotation;
+        // 4. Напрямую устанавливаем вычисленные локальные углы объекту.
+        // Так как мы меняем transform родителя, все дочерние объекты последуют за ним.
+        transform.localEulerAngles = targetLocalAngles;
     }
 }
