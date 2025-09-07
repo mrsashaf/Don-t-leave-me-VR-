@@ -1,12 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; // Эта строка ОБЯЗАТЕЛЬНА для работы со сценами
 
-public class SimpleSceneLoader : MonoBehaviour
+public class NextSceneLoader : MonoBehaviour
 {
-    [Header("Настройки загрузки")]
-    [Tooltip("Точное имя сцены, которую нужно загрузить. Имя должно совпадать с названием файла сцены.")]
-    public string sceneNameToLoad;
-
     // Флаг, чтобы избежать случайной многократной загрузки
     private bool isLoading = false;
 
@@ -16,14 +12,29 @@ public class SimpleSceneLoader : MonoBehaviour
         // и что мы еще не начали процесс загрузки
         if (other.CompareTag("Player") && !isLoading)
         {
-            // Устанавливаем флаг, чтобы этот код не сработал снова
             isLoading = true;
 
-            // Выводим сообщение в консоль, чтобы было понятно, что скрипт сработал
-            Debug.Log($"Игрок вошел в зону. Загружается сцена: {sceneNameToLoad}");
+            // Получаем индекс текущей сцены
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-            // Главная команда - загрузить сцену по ее имени
-            SceneManager.LoadScene(sceneNameToLoad);
+            // Вычисляем индекс следующей сцены
+            int nextSceneIndex = currentSceneIndex + 1;
+
+            // Проверяем, существует ли следующая сцена в настройках сборки.
+            // SceneManager.sceneCountInBuildSettings содержит общее количество сцен.
+            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                // Если следующая сцена существует, загружаем ее
+                Debug.Log($"Игрок вошел в зону. Загружается следующая сцена по индексу: {nextSceneIndex}");
+                SceneManager.LoadScene(nextSceneIndex);
+            }
+            else
+            {
+                // Если это была последняя сцена, можно загрузить первую (индекс 0)
+                // или вывести сообщение об ошибке.
+                Debug.Log("Это была последняя сцена. Загружается начальная сцена (индекс 0).");
+                SceneManager.LoadScene(0);
+            }
         }
     }
 }
